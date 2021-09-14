@@ -111,8 +111,10 @@ class Data:
             best_mask = [0,0]
             worst_mask = [0,0]
 
+            # Loops through fips codes dictionary 
             for i in self.fips_codes.keys():
 
+                # Compares the first 2 numbers and if it is equal to the state_code then loop through and calculate the percentages
                 if i[:2] == state_code[1]:
                     value = self.fips_codes.get(i)
 
