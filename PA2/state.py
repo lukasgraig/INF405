@@ -12,9 +12,6 @@ class StateTuitionCalc(Data):
         self.state_data = super().get_state_data(state)
         self.state = state
 
-        for idx, cost in enumerate(self.state_data):
-            cost = cost.replace(',', '') # Replace the comma
-            self.state_data[idx] = int(cost) # Reassign the cleaned data to list
 
     def average_tuition_cost(self):
         '''A method to calculate the average tuition costs for the years given'''

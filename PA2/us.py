@@ -17,11 +17,19 @@ class USTuitionCalc(Data):
             state_avg = 0
             loop = 0
             for data in self.all_states.get(state):
-                data = data.replace(',', '') # Replace the comma
-                state_avg += int(data)
+                state_avg += data
                 loop += 1
             final_avg = state_avg / loop
             avg_state_tuition[state] = final_avg
+
+        loop = 0
+        avg = 0
+        for x in avg_state_tuition.values():
+            avg += x
+            loop += 1
+
+        final_avg = avg/loop
+        print(f'The average tuition rate in the US is ${final_avg:.2f}')
 
     def average_us_rise(self):
         final_dif_list = []
@@ -32,7 +40,6 @@ class USTuitionCalc(Data):
             hold_data = []
 
             for data in self.all_states.get(state): # For loop to get the differences from year to year then adds to a list
-                data = int(data.replace(',', '')) # Replace the comma
                 total = data - previous
                 previous = data
                 hold_data.append(total)
@@ -58,10 +65,8 @@ class USTuitionCalc(Data):
         loop = 0
         for state in self.all_states:
             state_tr = self.all_states.get(state)
-            cur_year = int(state_tr[11].replace(',', '')) # Replace the comma
-            last_year_tr += cur_year
-            prev_year = int(state_tr[10].replace(',', '')) # Replace the comma
-            tuition_rise = cur_year - prev_year
+            last_year_tr += state_tr[11]
+            tuition_rise = state_tr[11] - state_tr[10]
             tr_list.append(tuition_rise)
             loop += 1
 
@@ -72,7 +77,7 @@ class USTuitionCalc(Data):
         avg = oy_avg/ count
         last_year_tr = last_year_tr / loop 
         oy_final = last_year_tr + avg
-        print(f'The one year tuition rate for one year out in the US is ${oy_final:.2f}')
+        print(f'The prediction tuition rate one year out in the US is ${oy_final:.2f}')
 
     def two_year_us_prediction(self):
         ltr_list = []

@@ -11,7 +11,10 @@ def main():
         i.one_year_prediction()
         i.two_year_prediction()
 
-    w.two_year_us_prediction()
+    print('=============')
+    w.average_us_rise()
+    w.average_us_tuition()
+    w.one_year_us_prediction()
 
     
 
