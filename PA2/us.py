@@ -32,7 +32,7 @@ class USTuitionCalc(Data):
         print(f'The average tuition rate in the US is ${final_avg:.2f}')
 
     def average_us_rise(self):
-        final_dif_list = []
+        final_dif_list = [] 
 
         for state in self.all_states:
             total = 0
@@ -56,7 +56,7 @@ class USTuitionCalc(Data):
             final += x
 
         self.final_avg = final/count
-        print(f'The average tutition price rise is ${self.final_avg:.2f}')
+        print(f'The average tutition price rise in the US is ${self.final_avg:.2f}')
 
     def one_year_us_prediction(self):
         
@@ -80,24 +80,36 @@ class USTuitionCalc(Data):
         print(f'The prediction tuition rate one year out in the US is ${oy_final:.2f}')
 
     def two_year_us_prediction(self):
-        ltr_list = []
-        avg_list = []
-
+        last_year_tr = 0 # Last year tuition rate 
+        tr_list = [] # Holds the difference for the last year for all states
+        loop = 0
         for state in self.all_states:
             state_tr = self.all_states.get(state)
-            tuition_rise = int(state_tr[12].replace(',', '')) - int(state_tr[11].replace(',', ''))
-            average = (int(state_tr[12].replace(',', '')) + int(state_tr[11].replace(',', '')) + int(state_tr[10].replace(',', ''))) / 3
-            ltr_list.append(tuition_rise)
-            avg_list.append(average)
+            last_year_tr += state_tr[11]
+            tuition_rise = state_tr[11] - state_tr[10]
+            tr_list.append(tuition_rise)
+            loop += 1
 
-        print(ltr_list)
-        print(avg_list)
+        oy_avg = 0     
+        for count, x in enumerate(tr_list):
+            oy_avg += x   
 
-        '''typ_final = 0
-        for count, cost in enumerate(self.state_data):
-            typ_final += cost
+        avg = oy_avg/ count
+        last_year_tr = last_year_tr / loop 
+        oy_final = last_year_tr + avg
 
-        typ_final = typ_final / count
-        final_pred = (typ_final + average) / 2 + tuition_rise
+        prev_year = 0 # Holds the value of 2015-16 for all schools combined
+        sec_year = 0  # Holds the value of 2014-15 for all schools combined
+        for state in self.all_states:
+            x = self.all_states.get(state)
+            prev_year += x[11]
+            sec_year += x[10]
 
-        print(f'The two year prediction in {self.state} is ${final_pred:.2f}')'''
+        tuition_rise = oy_final - (prev_year / 50)
+
+        average = (oy_final + (prev_year / 50) + (sec_year / 50)) / 3
+
+     
+        final_pred = tuition_rise + average
+        print(f'The prediction tuition rate two years out in the US is ${final_pred:.2f}')
+

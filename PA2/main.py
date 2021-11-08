@@ -4,7 +4,7 @@ from us import USTuitionCalc
 def main():
     i = StateTuitionCalc('us_avg_tuition.csv')
     w = USTuitionCalc('us_avg_tuition.csv')
-    i.state_select('Alabama')
+    i.state_select('California')
     i.average_tuition_cost()
     for x in range(1):
         i.average_rise()
@@ -15,6 +15,7 @@ def main():
     w.average_us_rise()
     w.average_us_tuition()
     w.one_year_us_prediction()
+    w.two_year_us_prediction()
 
     
 
