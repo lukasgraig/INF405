@@ -39,6 +39,9 @@ class StateTuitionCalc(Data):
             dif_total += x
 
         self.avg_rise = dif_total / count
+
+    def get_average_rise(self):
+        '''A method to calculate the average rise in tuition for the years given'''
         print(f'The average rise in tuition for each year in {self.state} is ${self.avg_rise:.2f}')
 
 
